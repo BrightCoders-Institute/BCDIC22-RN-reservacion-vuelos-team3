@@ -72,7 +72,7 @@ export default function SignUp() {
               />
             </View>
 
-            {/* <Button onPress={handleSubmit} title="Sign up" style={{width:"75%"}} /> */}
+       
           </View>
         )}
       </Formik>
