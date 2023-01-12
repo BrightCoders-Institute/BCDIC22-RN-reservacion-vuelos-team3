@@ -3,26 +3,19 @@ import { Formik } from "formik";
 import { styles } from "../styles/styles";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
+import Checkbox from "expo-checkbox";
 
 export default function SignUp() {
   const [viewPassword, setViewPassword] = useState(true);
+  const [checkedPolicy, setCheckedPolicy] = useState(false);
+  const [checkedSubscribed, setCheckedSubscribed] = useState(false);
   return (
     <View
       style={{
         width: "100%",
       }}
     >
-      <Text
-        style={{
-          marginLeft: "7%",
-          fontSize: 20,
-          fontWeight: "bold",
-          color: "#085DFD",
-          paddingBottom: 15,
-        }}
-      >
-        Sign Up
-      </Text>
+      <Text style={styles.textSignUpStyle}>Sign Up</Text>
       <Formik
         initialValues={{ firstName: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
@@ -71,8 +64,47 @@ export default function SignUp() {
                 onPress={() => setViewPassword(!viewPassword)}
               />
             </View>
+            <Text
+              style={{
+                color: "gray",
+                width: "85%",
+                marginTop: -10,
+                marginBottom: 10,
+              }}
+            >
+              Use 8 characters with a mix of letters, numbers and symbols
+            </Text>
 
-            {/* <Button onPress={handleSubmit} title="Sign up" style={{width:"75%"}} /> */}
+            {/* Terms and Policy */}
+            <View style={{ width: "85%", marginTop: 15, flexDirection: "row" }}>
+              <Checkbox
+                value={checkedPolicy}
+                onValueChange={setCheckedPolicy}
+                color={"#085DFD"}
+              />
+              <Text style={styles.checkboxTextStyle}>
+                I agree to the Terms and Privacy Policy.
+              </Text>
+            </View>
+            {/* Subscribe */}
+            <View style={{ width: "85%", marginTop: 15, flexDirection: "row" }}>
+              <Checkbox
+                value={checkedSubscribed}
+                onValueChange={setCheckedSubscribed}
+                color={"#085DFD"}
+              />
+              <Text style={styles.checkboxTextStyle}>
+                Subscribe for select product updates.
+              </Text>
+            </View>
+
+            <View style={{ width: "85%", marginTop: 25 }}>
+              <Button
+                // onPress={handleSubmit}
+                title="Sign up"
+                color="#085DFD"
+              />
+            </View>
           </View>
         )}
       </Formik>
