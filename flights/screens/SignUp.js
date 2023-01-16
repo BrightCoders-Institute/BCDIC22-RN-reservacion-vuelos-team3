@@ -48,8 +48,8 @@ export default function SignUp() {
 
             <View
               style={{
-                width: "85%",
                 position: "relative",
+                width: "85%",
               }}
             >
               <TextInput
@@ -71,8 +71,6 @@ export default function SignUp() {
                 onPress={() => setViewPassword(!viewPassword)}
               />
             </View>
-
-       
           </View>
         )}
       </Formik>
