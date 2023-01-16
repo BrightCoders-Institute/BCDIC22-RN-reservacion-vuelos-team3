@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   textInputField: {
-   backgroundColor: "#ffffff",
-   borderColor: "#000000",
+    backgroundColor: "#ffffff",
+    borderColor: "#000000",
     borderWidth: 1,
     fontSize: 15,
     height: 45,
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   textInputPassword: {
     backgroundColor: "#ffffff",
-   borderColor: "#000000",
+    borderColor: "#000000",
     borderWidth: 1,
     fontSize: 18,
     height: 45,
