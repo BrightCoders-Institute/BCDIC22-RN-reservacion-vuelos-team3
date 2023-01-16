@@ -28,7 +28,7 @@ export default function SignUp() {
               onBlur={handleBlur("email")}
               value={values.firstName}
               style={styles.textInputField}
-              selectionColor="rd"
+              selectionColor="red"
             />
             <Text style={styles.textFieldLabel}>Email</Text>
             <TextInput
@@ -38,11 +38,10 @@ export default function SignUp() {
               style={styles.textInputField}
             />
             <Text style={styles.textFieldLabel}>Password</Text>
-
             <View
               style={{
-                width: "85%",
                 position: "relative",
+                width: "85%"
               }}
             >
               <TextInput
@@ -67,16 +66,15 @@ export default function SignUp() {
             <Text
               style={{
                 color: "gray",
-                width: "85%",
-                marginTop: -10,
                 marginBottom: 10,
+                marginTop: -10,
+                width: "85%"
               }}
             >
               Use 8 characters with a mix of letters, numbers and symbols
             </Text>
-
             {/* Terms and Policy */}
-            <View style={{ width: "85%", marginTop: 15, flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", marginTop: 15, width: "85%",  }}>
               <Checkbox
                 value={checkedPolicy}
                 onValueChange={setCheckedPolicy}
@@ -97,8 +95,7 @@ export default function SignUp() {
                 Subscribe for select product updates.
               </Text>
             </View>
-
-            <View style={{ width: "85%", marginTop: 25 }}>
+            <View style={{ marginTop: 25, width: "85%" }}>
               <Button
                 // onPress={handleSubmit}
                 title="Sign up"
