@@ -4,7 +4,9 @@ import SignUp from "./screens/SignUp";
 import { styles } from "./styles/styles";
 export default function App() {
   return (
+
     <View style={styles.containerApp}>
+
       <SignUp />
       <StatusBar style="auto" />
     </View>
