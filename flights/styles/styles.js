@@ -2,9 +2,9 @@ import { StyleSheet, TextInput } from "react-native";
 
 export const styles = StyleSheet.create({
   containerApp: {
+    backgroundColor: "#fff",
     flex: 1,
     marginTop: 40,
-    backgroundColor: "#fff",
     width: "100%",
   },
   fieldsContainer: {
@@ -48,5 +48,5 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginLeft: 5,
   },
-  signupButton: { width: "85%", marginTop: 25 },
+  signupButton: {marginTop: 25, width: "85%" },
 });
