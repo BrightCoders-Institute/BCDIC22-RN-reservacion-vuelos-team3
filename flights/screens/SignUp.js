@@ -10,16 +10,11 @@ export default function SignUp() {
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
   return (
-    <View
-      style={{
-        width: "100%",
-      }}
-    >
+    <View style={styles.signup}>
       <Text style={styles.textSignUpStyle}>Sign Up</Text>
       <Formik
         initialValues={{ firstName: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-      >
+        onSubmit={(values) => console.log(values)}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.fieldsContainer}>
             <Text style={styles.textFieldLabel}>First Name</Text>
@@ -38,12 +33,7 @@ export default function SignUp() {
               style={styles.textInputField}
             />
             <Text style={styles.textFieldLabel}>Password</Text>
-            <View
-              style={{
-                position: "relative",
-                width: "85%"
-              }}
-            >
+            <View style={styles.containerPassword}>
               <TextInput
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
@@ -64,18 +54,11 @@ export default function SignUp() {
               />
             </View>
 
-            <Text
-              style={{
-                color: "gray",
-                marginBottom: 10,
-                marginTop: -10,
-                width: "85%"
-              }}
-            >
+            <Text style={styles.textCharacters}>
               Use 8 characters with a mix of letters, numbers and symbols
             </Text>
             {/* Terms and Policy */}
-            <View style={{ flexDirection: "row", marginTop: 15, width: "85%",  }}>
+            <View style={styles.checkBoxTerms}>
               <Checkbox
                 value={checkedPolicy}
                 onValueChange={setCheckedPolicy}
@@ -86,7 +69,7 @@ export default function SignUp() {
               </Text>
             </View>
             {/* Subscribe */}
-            <View style={{ width: "85%", marginTop: 15, flexDirection: "row" }}>
+            <View style={styles.checkBoxSuscribe}>
               <Checkbox
                 value={checkedSubscribed}
                 onValueChange={setCheckedSubscribed}
@@ -96,7 +79,7 @@ export default function SignUp() {
                 Subscribe for select product updates.
               </Text>
             </View>
-            <View style={{ marginTop: 25, width: "85%" }}>
+            <View style={styles.signUpButton}>
               <Button
                 // onPress={handleSubmit}
                 title="Sign up"
