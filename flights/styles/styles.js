@@ -48,5 +48,8 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginLeft: 5,
   },
+  signup: {
+    width: "100%",
+  },
   signupButton: {marginTop: 25, width: "85%" },
 });
