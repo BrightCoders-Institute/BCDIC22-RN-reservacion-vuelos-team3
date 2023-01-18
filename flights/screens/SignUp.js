@@ -81,7 +81,6 @@ export default function SignUp() {
             </View>
             <View style={styles.signUpButton}>
               <Button
-                // onPress={handleSubmit}
                 title="Sign up"
                 color="#085DFD"
               />
