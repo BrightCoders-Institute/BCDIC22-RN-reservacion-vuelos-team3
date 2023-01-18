@@ -14,7 +14,7 @@ export default function SignUp() {
       <Text style={styles.textSignUpStyle}>Sign Up</Text>
       <Formik
         initialValues={{ firstName: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}>
+        onSubmit={(values) => Alert.alert(values)}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.fieldsContainer}>
             <Text style={styles.textFieldLabel}>First Name</Text>
