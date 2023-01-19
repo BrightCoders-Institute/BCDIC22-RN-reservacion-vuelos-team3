@@ -2,9 +2,9 @@ import { StyleSheet, TextInput } from "react-native";
 
 export const styles = StyleSheet.create({
   containerApp: {
+    backgroundColor: "#fff",
     flex: 1,
     marginTop: 40,
-    backgroundColor: "#fff",
     width: "100%",
   },
   fieldsContainer: {
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 
   textFieldLabel: {
     alignSelf: "flex-start",
-    marginLeft: "7%",
+    marginLeft: "7.5%",
     paddingBottom: 5,
   },
   textInputField: {
@@ -48,5 +48,61 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginLeft: 5,
   },
-  signupButton: { width: "85%", marginTop: 25 },
+  signup: {
+    width: "100%",
+  },
+  signupButton: {
+    marginTop: 25,
+    width: "85%",
+  },
+  containerPassword: {
+    position: "relative",
+    width: "85%",
+  },
+  textCharacters: {
+    color: "gray",
+    marginBottom: 10,
+    marginTop: -10,
+    width: "85%",
+  },
+  checkBoxTerms: {
+    flexDirection: "row",
+    marginTop: 15,
+    width: "85%",
+  },
+  checkBoxSuscribe: {
+    width: "85%",
+    marginTop: 15,
+    flexDirection: "row",
+  },
+  signUpButton: {
+    alignItems: "center",
+    borderRadius: 10,
+    height: 35,
+    justifyContent: "center",
+  },
+  eyeIcon: { position: "absolute", right: 10, top: 10 },
+  textTouchableButton: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  orText: { paddingVertical: 15, color: "gray" },
+  googleButton: {
+    borderRadius: 10,
+    backgroundColor: "#4285f4",
+    height: 35,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "85%",
+    alignSelf: "center",
+  },
+  viewGoogleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textGoogleButton: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+    marginLeft: 12,
+  },
+  bottomText: { marginTop: 20, color: "gray", alignSelf: "center" },
+  linkLogin: { color: "#4285f4", textDecorationLine: "underline" },
 });
