@@ -67,8 +67,7 @@ export default function SignUp() {
       <Text style={styles.textSignUpStyle}>Sign Up</Text>
       <Formik
         initialValues={{ firstName: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-      >
+        onSubmit={(values) => Alert.alert(values)}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.fieldsContainer}>
             <Text style={styles.textFieldLabel}>First Name *</Text>
@@ -94,7 +93,6 @@ export default function SignUp() {
               selectionColor="#4285F4"
             />
             <Text style={styles.textFieldLabel}>Password *</Text>
-
             <View style={styles.containerPassword}>
               <TextInput
                 onChangeText={(value) => setPassword(value)}
@@ -118,7 +116,6 @@ export default function SignUp() {
             <Text style={styles.textCharacters}>
               Use 8 characters with a mix of letters, numbers and symbols
             </Text>
-
             {/* Terms and Policy */}
             <View style={styles.checkBoxTerms}>
               <Checkbox
@@ -141,7 +138,6 @@ export default function SignUp() {
                 Subscribe for select product updates.
               </Text>
             </View>
-
             <View style={styles.signupButton}>
               {/* Signup Button */}
               <TouchableHighlight
