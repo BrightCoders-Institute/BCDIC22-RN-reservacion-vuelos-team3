@@ -105,4 +105,5 @@ export const styles = StyleSheet.create({
   },
   bottomText: { marginTop: 20, color: "gray", alignSelf: "center" },
   linkLogin: { color: "#4285f4", textDecorationLine: "underline" },
+  signIn: { marginTop: "25%" },
 });
