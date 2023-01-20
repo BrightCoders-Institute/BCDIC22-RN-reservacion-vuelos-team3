@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { styles } from "../styles/styles";
 
 export default function ScreenModal({ modalVisible, setModalVisible }) {
   //   const [modalVisible, setModalVisible] = useState(true);
