@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
 export default function ScreenModal({ modalVisible, setModalVisible }) {
-  //   const [modalVisible, setModalVisible] = useState(true);
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -35,7 +34,6 @@ export default function ScreenModal({ modalVisible, setModalVisible }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
