@@ -62,6 +62,7 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 10,
     marginTop: -10,
+
     width: "85%",
   },
   checkBoxTerms: {
@@ -148,4 +149,3 @@ export const styles = StyleSheet.create({
   },
 });
 
-});
