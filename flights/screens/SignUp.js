@@ -14,6 +14,7 @@ import Checkbox from "expo-checkbox";
 import * as Google from "expo-auth-session/providers/google";
 import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
+import { androidClientId, iosClientId, expoClientId } from "@env";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -29,12 +30,9 @@ export default function SignUp() {
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
   //  handle google data
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "574186843571-qvvmqu8om3do6f7ahhuo6qt8lj3csn30.apps.googleusercontent.com",
-    iosClientId:
-      "574186843571-55nd4un4a81bo3c1t38sqnibir1kesja.apps.googleusercontent.com",
-    expoClientId:
-      "574186843571-lefr80nu249qusga4teuidp7050rkd4k.apps.googleusercontent.com",
+    androidClientId: androidClientId,
+    iosClientId: iosClientId,
+    expoClientId: expoClientId,
   });
 
   useEffect(() => {
