@@ -1,14 +1,51 @@
 import { Button, TextInput, View, Text } from "react-native";
+import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { styles } from "../styles/styles";
 import { AntDesign } from "@expo/vector-icons";
-import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { db } from "../firebaseConfig";
+// import firebase from 'firebase/app';
+
+import { app } from "../firebaseConfig";
+
+const collectionRef = collection(db,'users')
+
 
 export default function SignUp() {
+  const [users, setUsers] = useState([])
+  useEffect(()=>{
+    const getUsers = async ()=>{
+      console.log("üsers!!!")
+      await getDocs(collectionRef).then((users)=>{
+        let usersData = users.docs.map((doc)=> ({...doc.data(), id:doc.id}))
+        setUsers(usersData)
+      }).catch((err)=>console.log(err))
+    }
+    getUsers()
+  },[])
+
+  // Save user to data base:
+  const submitSignupForm = async (e)=>{
+    e.preventDefault()
+    console.log("adding data")
+    try {
+      await addDoc(collectionRef,{
+        firstName:"Manz",
+        email:"manz@gmail.com",
+        password:"password"
+
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
   const [viewPassword, setViewPassword] = useState(true);
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
+
   return (
     <View style={styles.signup}>
       <Text style={styles.textSignUpStyle}>Sign Up</Text>
@@ -83,6 +120,7 @@ export default function SignUp() {
               <Button
                 title="Sign up"
                 color="#085DFD"
+                onPress={submitSignupForm}
               />
             </View>
           </View>
