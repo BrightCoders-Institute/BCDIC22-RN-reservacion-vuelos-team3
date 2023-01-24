@@ -91,7 +91,6 @@ export default function SignUp() {
               selectionColor="#4285F4"
             />
             <Text style={styles.textFieldLabel}>Password *</Text>
-
             <View style={styles.containerPassword}>
               <TextInput
                 onChangeText={(value) => setPassword(value)}

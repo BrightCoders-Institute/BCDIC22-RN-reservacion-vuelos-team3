@@ -62,8 +62,7 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 10,
     marginTop: -10,
-
-    width: "85%",
+    width: "85%"
   },
   checkBoxTerms: {
     flexDirection: "row",

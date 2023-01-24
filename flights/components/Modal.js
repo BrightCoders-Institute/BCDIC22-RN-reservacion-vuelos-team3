@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { styles } from "../styles/styles";
 
 export default function ScreenModal({ modalVisible, setModalVisible }) {
   return (
@@ -27,4 +28,3 @@ export default function ScreenModal({ modalVisible, setModalVisible }) {
       </Modal>
     </View>
   );
-}  

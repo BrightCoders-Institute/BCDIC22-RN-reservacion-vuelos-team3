@@ -1,3 +1,4 @@
+
 import {
   Button,
   TextInput,
@@ -16,7 +17,7 @@ import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
 import { androidClientId, iosClientId, expoClientId } from "@env";
 
-export default function SignUp() {
+export default function Login() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
