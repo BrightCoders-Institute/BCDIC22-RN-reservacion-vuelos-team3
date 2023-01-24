@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   textFieldLabel: {
     alignSelf: "flex-start",
     marginLeft: "7.5%",
@@ -63,7 +62,7 @@ export const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 10,
     marginTop: -10,
-    width: "85%",
+    width: "85%"
   },
   checkBoxTerms: {
     flexDirection: "row",
@@ -105,6 +104,7 @@ export const styles = StyleSheet.create({
   },
   bottomText: { marginTop: 20, color: "gray", alignSelf: "center" },
   linkLogin: { color: "#4285f4", textDecorationLine: "underline" },
+  signIn: { marginTop: "25%" },
   centeredView: {
     alignItems: "center",
     flex: 1,
@@ -120,8 +120,8 @@ export const styles = StyleSheet.create({
     padding: 35,
     shadowColor: "#000",
     shadowOffset: {
-      height: 2,
       width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     elevation: 2,
-    padding: 10, 
+    padding: 10,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -147,3 +147,4 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+

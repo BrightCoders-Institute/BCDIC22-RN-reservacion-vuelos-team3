@@ -28,4 +28,3 @@ export default function ScreenModal({ modalVisible, setModalVisible }) {
       </Modal>
     </View>
   );
-}
