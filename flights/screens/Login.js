@@ -16,59 +16,25 @@ import * as Google from "expo-auth-session/providers/google";
 import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
 import { androidClientId, iosClientId, expoClientId } from "@env";
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
-import { db } from "../firebaseConfig";
-import { app } from "../firebaseConfig";
 
-export default function SignUp() {
+export default function Login() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-   const [users, setUsers] = useState([])
   // handle view password eye icon
-
   const [viewPassword, setViewPassword] = useState(true);
   //  handle check boxes
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
-
   //  handle google data
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: androidClientId,
     iosClientId: iosClientId,
     expoClientId: expoClientId,
   });
- 
-   //  get users from firebase
-  useEffect(()=>{
-    const getUsers = async ()=>{
-      console.log("üsers!!!")
-      await getDocs(collectionRef).then((users)=>{
-        let usersData = users.docs.map((doc)=> ({...doc.data(), id:doc.id}))
-        setUsers(usersData)
-      }).catch((err)=>console.log(err))
-    }
-    getUsers()
-  },[])
-  
-    // Save user to data base:
-  const submitSignupForm = async (e)=>{
-    e.preventDefault()
-    console.log("adding data")
-    try {
-      await addDoc(collectionRef,{
-        firstName:"Manz",
-        email:"manz@gmail.com",
-        password:"password"
-
-      })
-    }catch(err){
-      console.log(err)
-    }
-  }
 
   useEffect(() => {
     if (response?.type === "success") {
@@ -92,29 +58,19 @@ export default function SignUp() {
   };
 
   return (
-    <View style={styles.signup}>
+    <View style={styles.signIn}>
       <ScreenModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
-      <Text style={styles.textSignUpStyle}>Sign Up</Text>
+      <Text style={styles.textSignUpStyle}>Log in</Text>
       <Formik
-        initialValues={{ firstName: "", email: "", password: "" }}
-        onSubmit={(values) => Alert.alert(values)}>
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => console.log(values)}
+      >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.fieldsContainer}>
-            <Text style={styles.textFieldLabel}>First Name *</Text>
-            <TextInput
-              onChangeText={(value) => setFirstName(value)}
-              onBlur={handleBlur("firstname")}
-              value={firstName}
-              style={{
-                ...styles.textInputField,
-                borderColor: firstName !== "" ? "#4285F4" : "gray",
-              }}
-              selectionColor="#4285F4"
-            />
-            <Text style={styles.textFieldLabel}>Email</Text>
+            <Text style={styles.textFieldLabel}>Email *</Text>
             <TextInput
               onChangeText={(value) => setEmail(value)}
               onBlur={handleBlur("email")}
@@ -126,6 +82,7 @@ export default function SignUp() {
               selectionColor="#4285F4"
             />
             <Text style={styles.textFieldLabel}>Password *</Text>
+
             <View style={styles.containerPassword}>
               <TextInput
                 onChangeText={(value) => setPassword(value)}
@@ -146,65 +103,25 @@ export default function SignUp() {
                 onPress={() => setViewPassword(!viewPassword)}
               />
             </View>
-            <Text style={styles.textCharacters}>
-              Use 8 characters with a mix of letters, numbers and symbols
-            </Text>
-            {/* Terms and Policy */}
-            <View style={styles.checkBoxTerms}>
-              <Checkbox
-                value={checkedPolicy}
-                onValueChange={setCheckedPolicy}
-                color={"#4285F4"}
-              />
-              <Text style={styles.checkboxTextStyle}>
-                I agree to the Terms and Privacy Policy.
-              </Text>
-            </View>
-            {/* Subscribe */}
-            <View style={styles.checkBoxSuscribe}>
-              <Checkbox
-                value={checkedSubscribed}
-                onValueChange={setCheckedSubscribed}
-                color={"#4285F4"}
-              />
-              <Text style={styles.checkboxTextStyle}>
-                Subscribe for select product updates.
-              </Text>
-            </View>
-
             <View style={styles.signupButton}>
               {/* Signup Button */}
               <TouchableHighlight
-                onPress={() => submitSignupForm()}
-                disabled={
-                  firstName !== "" &&
-                  email !== "" &&
-                  password !== "" &&
-                  checkedPolicy !== false &&
-                  checkedSubscribed !== false
-                    ? false
-                    : true
-                }
+                onPress={() => setModalVisible(true)}
+                disabled={email !== "" && password !== "" ? false : true}
                 style={{
                   ...styles.signUpButton,
                   backgroundColor:
-                    firstName !== "" &&
-                    email !== "" &&
-                    password !== "" &&
-                    checkedPolicy !== false &&
-                    checkedSubscribed !== false
-                      ? "#4285f4"
-                      : "gray",
+                    email !== "" && password !== "" ? "#4285f4" : "gray",
                 }}
               >
-                <Text style={styles.textTouchableButton}>Sign up</Text>
+                <Text style={styles.textTouchableButton}>Sign In</Text>
               </TouchableHighlight>
             </View>
             <Text style={styles.orText}>Or</Text>
           </View>
         )}
       </Formik>
-      {/* Sign up with google button */}
+      {/* Log In with google button */}
       <TouchableHighlight
         style={styles.googleButton}
         onPress={
@@ -215,15 +132,15 @@ export default function SignUp() {
       >
         <View style={styles.viewGoogleButton}>
           <AntDesign name="google" size={18} color="white" />
-          <Text style={styles.textGoogleButton}>Sign up with google</Text>
+          <Text style={styles.textGoogleButton}>Sign In with google</Text>
         </View>
       </TouchableHighlight>
       {/* Already have an account */}
       <Text style={styles.bottomText}>
-        Already have an account?{" "}
-        <Link style={styles.linkLogin} to={{ screen: "Login" }}>
+        Don't have an account?{" "}
+        <Link style={styles.linkLogin} to={{ screen: "Signup" }}>
           {" "}
-          Log in{" "}
+          Sign up{" "}
         </Link>
       </Text>
     </View>
