@@ -45,11 +45,10 @@ export default function SignUp() {
    //  get users from firebase
   useEffect(()=>{
     const getUsers = async ()=>{
-      console.log("üsers!!!")
       await getDocs(collectionRef).then((users)=>{
         let usersData = users.docs.map((doc)=> ({...doc.data(), id:doc.id}))
         setUsers(usersData)
-      }).catch((err)=>console.log(err))
+      }).catch((err)=>Alert.alert(err))
     }
     getUsers()
   },[])
@@ -57,7 +56,6 @@ export default function SignUp() {
     // Save user to data base:
   const submitSignupForm = async (e)=>{
     e.preventDefault()
-    console.log("adding data")
     try {
       await addDoc(collectionRef,{
         firstName:"Manz",
@@ -66,7 +64,7 @@ export default function SignUp() {
 
       })
     }catch(err){
-      console.log(err)
+      Alert.alert(err)
     }
   }
 
