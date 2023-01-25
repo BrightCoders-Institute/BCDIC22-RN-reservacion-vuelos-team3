@@ -1,18 +1,19 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId, measurementId } from "@env";
 
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCzoDAWeGcGTnyUTobBXhvZNhMlSrNXrRU",
-  authDomain: "flights-team-3-df47b.firebaseapp.com",
-  databaseURL:"https://flights-team-3-df47b-default-rtdb.firebaseio.com/",
-  projectId: "flights-team-3-df47b",
-  storageBucket: "flights-team-3-df47b.appspot.com",
-  messagingSenderId: "8699604787",
-  appId: "1:8699604787:web:2cb9a2ba0fc836ea805846",
-  measurementId: "G-Y711WVZ14X"
+  apiKey: apiKey,
+  authDomain: authDomain,
+  databaseURL:databaseURL,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId:  messagingSenderId,
+  appId: appId,
+  measurementId: measurementId
 };
 
 export const app = initializeApp(firebaseConfig);
