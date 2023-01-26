@@ -1,3 +1,4 @@
+
 import {
   Button,
   TextInput,
@@ -15,6 +16,9 @@ import * as Google from "expo-auth-session/providers/google";
 import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
 import { androidClientId, iosClientId, expoClientId } from "@env";
+import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { db } from "../firebaseConfig";
+import { app } from "../firebaseConfig";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -23,17 +27,46 @@ export default function SignUp() {
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+   const [users, setUsers] = useState([])
   // handle view password eye icon
+
   const [viewPassword, setViewPassword] = useState(true);
   //  handle check boxes
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
+
   //  handle google data
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: androidClientId,
     iosClientId: iosClientId,
     expoClientId: expoClientId,
   });
+ 
+   //  get users from firebase
+  useEffect(()=>{
+    const getUsers = async ()=>{
+      await getDocs(collectionRef).then((users)=>{
+        let usersData = users.docs.map((doc)=> ({...doc.data(), id:doc.id}))
+        setUsers(usersData)
+      }).catch((err)=>Alert.alert(err))
+    }
+    getUsers()
+  },[])
+  
+    // Save user to data base:
+  const submitSignupForm = async (e)=>{
+    e.preventDefault()
+    try {
+      await addDoc(collectionRef,{
+        firstName:"Manz",
+        email:"manz@gmail.com",
+        password:"password"
+
+      })
+    }catch(err){
+      Alert.alert(err)
+    }
+  }
 
   useEffect(() => {
     if (response?.type === "success") {
@@ -136,10 +169,11 @@ export default function SignUp() {
                 Subscribe for select product updates.
               </Text>
             </View>
+
             <View style={styles.signupButton}>
               {/* Signup Button */}
               <TouchableHighlight
-                onPress={() => setModalVisible(true)}
+                onPress={() => submitSignupForm()}
                 disabled={
                   firstName !== "" &&
                   email !== "" &&
