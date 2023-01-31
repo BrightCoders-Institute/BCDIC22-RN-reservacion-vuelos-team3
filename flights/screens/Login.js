@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableHighlight,
+  Alert
 } from "react-native";
 import { Formik } from "formik";
 import { styles } from "../styles/styles";
@@ -66,7 +67,7 @@ export default function Login() {
       <Text style={styles.textSignUpStyle}>Log in</Text>
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => Alert.alert(values)}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.fieldsContainer}>
