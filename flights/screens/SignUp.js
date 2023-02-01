@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableHighlight,
+  Alert
 } from "react-native";
 import { Formik } from "formik";
 import { styles } from "../styles/styles";
@@ -15,10 +16,11 @@ import Checkbox from "expo-checkbox";
 import * as Google from "expo-auth-session/providers/google";
 import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
-import { androidClientId, iosClientId, expoClientId } from "@env";
+// import { androidClientId, iosClientId, expoClientId } from "@env";
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
 import { db } from "../firebaseConfig";
 import { app } from "../firebaseConfig";
+import { androidClientId, iosClientId, expoClientId } from '@env';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -26,47 +28,69 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState();
-  const [modalVisible, setModalVisible] = useState(false);
-   const [users, setUsers] = useState([])
-  // handle view password eye icon
+  const [modalVisible, setModalVisible] = useState(true);
+  const [users, setUsers] = useState([])
 
+  // handle view password eye icon
   const [viewPassword, setViewPassword] = useState(true);
   //  handle check boxes
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const [checkedSubscribed, setCheckedSubscribed] = useState(false);
 
+  const collectionRef = collection(db,"users")
   //  handle google data
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: androidClientId,
     iosClientId: iosClientId,
     expoClientId: expoClientId,
   });
- 
-   //  get users from firebase
-  useEffect(()=>{
-    const getUsers = async ()=>{
-      await getDocs(collectionRef).then((users)=>{
-        let usersData = users.docs.map((doc)=> ({...doc.data(), id:doc.id}))
-        setUsers(usersData)
-      }).catch((err)=>Alert.alert(err))
-    }
-    getUsers()
-  },[])
-  
-    // Save user to data base:
-  const submitSignupForm = async (e)=>{
-    e.preventDefault()
-    try {
-      await addDoc(collectionRef,{
-        firstName:"Manz",
-        email:"manz@gmail.com",
-        password:"password"
 
-      })
-    }catch(err){
-      Alert.alert(err)
+  // validate password
+  function checkPassword(str){
+      var re =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+      return re.test(str);
     }
-  }
+
+  //  get users from firebase
+  useEffect(() => {
+    const getUsers = async () => {
+      await getDocs(collectionRef)
+        .then((users) => {
+          let usersData = users.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setUsers(usersData);
+        })
+        .catch((err) => Alert.alert(err));
+    };
+    getUsers();
+  }, []);
+
+  const submitSignupForm = async () => {
+    // checking if email is in database
+    const emailInDatabase = users.find((emailUser)=>{
+      return (emailUser.email === email)
+    });
+    // validating data
+    const validPassword = checkPassword(password)
+
+    if(emailInDatabase !== undefined && emailInDatabase.email === email){
+          Alert.alert("Email in use. Use a different email")
+        }else if(!validPassword){
+          Alert.alert("Your password is not valid. Please add at least 8 characters, numbers and symbols")
+        }else{
+          try {
+            await addDoc(collectionRef, {
+              firstName: firstName,
+              email: email,
+              password: password,
+            });
+          } catch (err) {
+            Alert.alert(err);
+          }
+        }
+  };
 
   useEffect(() => {
     if (response?.type === "success") {
