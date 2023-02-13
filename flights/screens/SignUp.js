@@ -17,10 +17,16 @@ import * as Google from "expo-auth-session/providers/google";
 import { Link } from "@react-navigation/native";
 import ScreenModal from "../components/Modal";
 // import { androidClientId, iosClientId, expoClientId } from "@env";
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, doc, setDoc } from "firebase/firestore"; 
 import { db } from "../firebaseConfig";
 import { app } from "../firebaseConfig";
 import { androidClientId, iosClientId, expoClientId } from '@env';
+import {  addUserId } from "../store/dataSlice";
+import BackButton from "../components/BackButton";
+import { useDispatch } from "react-redux";
+
+
+
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -28,8 +34,11 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState();
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [users, setUsers] = useState([])
+  // redux
+  const dispatch = useDispatch();
+
 
   // handle view password eye icon
   const [viewPassword, setViewPassword] = useState(true);
@@ -50,6 +59,14 @@ export default function SignUp() {
       var re =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
       return re.test(str);
     }
+
+  // generate uid function
+  function generateUID() {
+    const uid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    
+    dispatch(addUserId(uid))
+    return uid
+  }
 
   //  get users from firebase
   useEffect(() => {
@@ -77,19 +94,23 @@ export default function SignUp() {
 
     if(emailInDatabase !== undefined && emailInDatabase.email === email){
           Alert.alert("Email in use. Use a different email")
-        }else if(!validPassword){
+        }if(!validPassword){
           Alert.alert("Your password is not valid. Please add at least 8 characters, numbers and symbols")
         }else{
           try {
-            await addDoc(collectionRef, {
-              firstName: firstName,
-              email: email,
-              password: password,
-            });
+            const uid = generateUID()
+            await setDoc(doc(db, "users", uid),{
+                firstName: firstName,
+                email: email,
+                password: password,
+                myflights: []
+              })
+              setModalVisible(!modalVisible)
           } catch (err) {
             Alert.alert(err);
           }
         }
+    
   };
 
   useEffect(() => {
